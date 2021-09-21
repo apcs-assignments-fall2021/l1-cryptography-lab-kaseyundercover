@@ -1,18 +1,95 @@
 import java.util.Scanner;
 
 public class Vigenere {
+    public static char encryptCaesarLetter(char ch, int key) {
+        int maxvalue= 'z'-key;
+        int capmax='Z'-key;
+            if (ch >= 'a' && ch <= maxvalue) {
+                char convert=(char)(ch+key);
+                return convert;}
+
+            else if (ch > maxvalue) {
+                char convert=(char)(ch-(26-key));
+                return convert;}
+
+            else if (ch >= 'A' && ch <= capmax) {
+                char convert=(char)(ch+key);
+                return convert;}
+
+            else if (ch > capmax) {
+                char convert=(char)(ch-(26-key));
+               return convert;}
+
+            else {
+                char convert = (char) (ch - (key+26));
+                return convert;}
+    }
+
+    public static char decryptCaesarLetter(char ch, int key) {
+        int maxvalue = 'a' + key;
+        int capmax = 'A' + key;
+            if (ch >= maxvalue && ch <= 'z') {
+                char convert = (char) (ch - key);
+                return convert;
+            } else if (ch > maxvalue) {
+                char convert = (char) (ch + (26 - key));
+                return convert;
+            } else if (ch >= capmax && ch <= 'Z') {
+                char convert = (char) (ch - key);
+                return convert;
+            } else if (ch > capmax) {
+                char convert = (char) (ch + (26 - key));
+                return convert;
+            } else {
+                char convert = (char) (ch + (26 - key));
+                return convert;
+            }
+
+
+        }
+
+
     public static String encryptVigenere(String message, String key) {
-        return message;
-        // REPLACE THIS WITH YOUR CODE
+        int keyIndex=0;
+        String result = "";
+       for (char i = 0; i < message.length(); i++) {
+           int y = key.charAt(keyIndex) - 'A';
+           char x = (message.charAt(i));
+           char z = encryptCaesarLetter(x, y);
+           keyIndex=keyIndex+1;
+           result=result+z;
+           if (keyIndex==key.length()){
+               keyIndex=0;
+           }
+
+       }
+    return result;
+
     }
 
     public static String decryptVigenere(String message, String key) {
-        return message;
-        // REPLACE THIS WITH YOUR CODE
+        int keyIndex=0;
+        String result = "";
+        for (char i = 0; i < message.length(); i++) {
+            int y = key.charAt(keyIndex) - 'A';
+            char x = (message.charAt(i));
+            char z = decryptCaesarLetter(x, y);
+            keyIndex=keyIndex+1;
+            result=result+z;
+            if (keyIndex==key.length()){
+                keyIndex=0;
+
+            }
+
+        }
+        return result;
+
     }
 
 
     public static void main(String[] args) {
+//       System.out.println(encryptCaesarLetter('H',2));
+
         Scanner scan = new Scanner(System.in);
 
         System.out.println("Would you like to \"encrypt\" or \"decrypt\" a message?");
