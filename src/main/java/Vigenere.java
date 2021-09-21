@@ -21,7 +21,8 @@ public class Vigenere {
                return convert;}
 
             else {
-                char convert = (char) (ch - (key+26));
+                char convert=(char)(ch);
+//                char convert = (char) (ch - (key+26));
                 return convert;}
     }
 
@@ -41,7 +42,8 @@ public class Vigenere {
                 char convert = (char) (ch + (26 - key));
                 return convert;
             } else {
-                char convert = (char) (ch + (26 - key));
+                char convert=(char)(ch);
+//                char convert = (char) (ch + (26 - key));
                 return convert;
             }
 
@@ -56,7 +58,15 @@ public class Vigenere {
            int y = key.charAt(keyIndex) - 'A';
            char x = (message.charAt(i));
            char z = encryptCaesarLetter(x, y);
-           keyIndex=keyIndex+1;
+
+//           System.out.println(x + " " + y);
+
+           if (message.charAt(i) >= 'A' && message.charAt(i)<='Z' ){
+               keyIndex=keyIndex+1;}
+           else if (message.charAt(i) >= 'a' && message.charAt(i)<='z' ){
+               keyIndex=keyIndex+1;}
+           else{keyIndex=keyIndex+0;}
+
            result=result+z;
            if (keyIndex==key.length()){
                keyIndex=0;
@@ -74,7 +84,14 @@ public class Vigenere {
             int y = key.charAt(keyIndex) - 'A';
             char x = (message.charAt(i));
             char z = decryptCaesarLetter(x, y);
-            keyIndex=keyIndex+1;
+//            System.out.println(x + " " + y);
+            if (message.charAt(i) >= 'A' && message.charAt(i)<='Z' ){
+            keyIndex=keyIndex+1;}
+            else if (message.charAt(i) >= 'a' && message.charAt(i)<='z' ){
+                keyIndex=keyIndex+1;}
+            else{
+                keyIndex=keyIndex+0;
+            }
             result=result+z;
             if (keyIndex==key.length()){
                 keyIndex=0;
